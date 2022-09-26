@@ -3,7 +3,7 @@ import React from 'react'
 function App() {
     return ( <
         div className = "App" >
-        Bao <
+        Ngo Tran Huy Bao <
         /div>
     );
 }
