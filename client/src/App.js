@@ -3,7 +3,7 @@ import React from 'react'
 function App() {
   return (
     <div className="App">
-      Nguyen Minh Quan dep trai
+      Nguyen Minh Quan dep traiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
     </div>
   );
 }
