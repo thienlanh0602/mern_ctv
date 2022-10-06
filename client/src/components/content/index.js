@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -13,8 +12,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useState, useEffect } from 'react'
+import Axios from 'axios'
+import '././index.css';
+
+
+
 
 export default function Contents() {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -23,29 +29,49 @@ export default function Contents() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+  const [Content, setContent] = useState([1]);
+  useEffect(() => {
+    Axios.get("http://localhost:3001/read").then((res) => {
+      setContent(res.data);
+    });
+  }, []);
   return (
-    <React.Fragment>
-        <Card sx={{ maxWidth: 496}}>     
-        <CardHeader
-            action={     
-                <Tooltip title="Chỉnh Sửa Bài Viết">  
-                <IconButton
-                onClick={handleClick}
-                size="small"
-                sx={{ ml: 2 }}
-                aria-controls={open ? 'account-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                style={{backgroundColor:"white",color:"black"}}
-            >
-            <MoreVertIcon />
-            </IconButton>    
-            </Tooltip>     
-            }       
-            title="Tuyển cộng tác viên trường HUTECH"
-            subheader="Người đăng bài: Ngô Trần Huy Bảo"
-        />
-        <Menu
+    <div>
+      {Content.map((val) => {
+        return (
+          <React.Fragment key={val.id}>
+            <Card sx={{ maxWidth: 496 }}>
+
+              {/* start cardHeader */}
+              <CardHeader
+                action={
+                  <Tooltip title="Chỉnh Sửa Bài Viết">
+
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                      aria-controls={open ? 'account-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      style={{ backgroundColor: "white", color: "black" }}
+                    >
+                      <MoreVertIcon />
+
+                    </IconButton>
+                  </Tooltip>
+                }>
+                  <Typography variant="body1" color="black" mb={1}>
+                  {val.TitleName}
+                </Typography>
+                </CardHeader>
+
+              {/* end cardHeader */}
+
+              {/* start menu */}
+              <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
@@ -56,7 +82,7 @@ export default function Contents() {
                   sx: {
                     overflow: 'visible',
                     filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                    mt: 1.5,                                 
+                    mt: 1.5,
                   },
                 }}
               >
@@ -73,18 +99,26 @@ export default function Contents() {
                   Xóa
                 </MenuItem>
               </Menu>
-        <CardContent>
-            <Typography variant="body1" color="black" mb={2}>
-                Nội Dung:
-            </Typography>
-            <Typography variant="body2" color="black">
-                Nhận file dữ liệu và các thông tin về sản phẩm 
-                (mô tả sản phẩm, giá bán, tên sản phẩm,...), 
-                và xử lý trên bảng tính Excel theo  yêu cầu 
-                của khách hàng.
-            </Typography>
-        </CardContent>
-        </Card>
-    </React.Fragment>
+              {/* end menu */}
+
+              {/* start conten */}
+              <CardContent>
+                <Typography variant="body1" color="black" mb={2}>
+                  {val.title}
+                </Typography>
+                <Typography variant="body1" color="black" mb={2}>
+                  Nội Dung:
+                </Typography>
+                <Typography variant="body2" color="black">
+                  {val.Content}
+                </Typography>
+              </CardContent>
+              {/* end content */}
+
+            </Card>
+          </React.Fragment>
+        )
+      })}
+    </div>
   );
 }

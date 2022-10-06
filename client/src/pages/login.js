@@ -15,52 +15,52 @@ function Login() {
     const [nameError, setNameError] = useState('')
     const [detailsError, setDetailsError] = useState('')
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault()   //Khi gửi yêu cầu thì ở lại chứ không văng ra khỏi trang chủ
-        
-        if (name && details){
-            console.log(name,details)
+
+        if (name && details) {
+            console.log(name, details)
         }
 
-        if (name == ''){
+        if (name == '') {
             setNameError(true)
         }
 
-        if (details == ''){
+        if (details == '') {
             setDetailsError(true)
         }
     }
-  return (
-    <Container>
-        <Typography variant='h3' gutterBottom align='center' >
-            Welcome to Create
-        </Typography>
-        <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-            <Box pb={2}>
-                <TextField 
-                label='Tên' 
-                variant='standard' 
-                fullWidth 
-                required 
-                onChange={(e) => setName(e.target.value)}
-                error={nameError}
-                />              
-                <TextField 
-                label='Chi Tiết' 
-                variant='standard' 
-                fullWidth 
-                required 
-                multiline rows={3} 
-                onChange={(e) => setDetails(e.target.value)} 
-                error={detailsError}
-                />
-            </Box>
-            <Button type='submit' variant='contained' startIcon={<SendIcon />}>
-                Gửi đi
-            </Button>
-        </form>
-    </Container>
-  )
+    return (
+        <Container>
+            <Typography variant='h3' gutterBottom align='center' >
+                Welcome to login
+            </Typography>
+            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+                <Box pb={2} textAlign='center'>
+                    <TextField
+                        label='Username'
+                        variant='standard'
+                        required
+                        onChange={(e) => setName(e.target.value)}
+                        error = {nameError}
+                    />
+                </Box>
+                <Box mt={2} mb={2} textAlign='center'>
+                    <TextField
+                        id="standard-password-input"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        variant="standard"
+                        error = {nameError}
+                    />
+                </Box>
+                <Box textAlign='center'>
+                    <Button type='submit' variant='contained' startIcon={<SendIcon />}>Gửi đi</Button>
+                </Box>
+            </form>
+        </Container>
+    )
 }
 
 export default Login
