@@ -32,6 +32,9 @@ export default function Headers() {
   const changeLogin = ()  =>{
     navigate("/login")
   }
+  const changeDangKy = ()  =>{
+    navigate("/dangky")
+  }
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -54,8 +57,7 @@ export default function Headers() {
               <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Cài Đặt Tài Khoản">
                   <IconButton
-                    //onClick={handleClick}
-                    onClick={changeLogin}
+                    onClick={handleClick}                  
                     size="small"
                     sx={{ ml: 2 }}
                     aria-controls={open ? 'account-menu' : undefined}
@@ -102,11 +104,11 @@ export default function Headers() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
-                <MenuItem>
+                <MenuItem onClick={changeLogin}>
                   <Avatar /> Tài Khoản Của Tôi
                 </MenuItem>
                 <Divider />
-                <MenuItem>
+                <MenuItem onClick={changeDangKy}>
                   <ListItemIcon>
                     <PersonAdd fontSize="small" />
                   </ListItemIcon>
@@ -118,12 +120,12 @@ export default function Headers() {
                   </ListItemIcon>
                   Cài Đặt
                 </MenuItem>
-                <MenuItem>
+                {/* <MenuItem>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
                   Đăng Xuất
-                </MenuItem>
+                </MenuItem> */}
               </Menu>
             </React.Fragment>
         </Toolbar> 

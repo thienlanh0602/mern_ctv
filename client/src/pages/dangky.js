@@ -9,19 +9,35 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Login from './login';
 
-export default function DangKy() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+import { useState } from "react";
+import { registerUser } from "../redux/apiRequest";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-  return (
+const Register = () => {
+  const [name,setName]= useState("");
+  const [classs,setClasss]= useState("");
+  const [mssv,setMssv]= useState("");
+  const [email,setEmail]= useState("");
+  const[username,setUsername] = useState("");
+  const[password,setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleRegister  = (e) => {
+      e.preventDefault(); 
+      const newUser = {
+          name:name,
+          class:classs,
+          mssv:mssv,
+          email: email,
+          username: username,
+          password: password
+      };
+      registerUser(newUser,dispatch,navigate);
+  }
+  return ( 
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -43,27 +59,47 @@ export default function DangKy() {
           <Typography component="h1" variant="h5" fontWeight="bold">
             ĐĂNG KÝ
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleRegister} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="Họ"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id="lastName"
-                  label="Tên"
-                  name="lastName"
+                  label="Họ và Tên"
+                  name="Name"
                   autoComplete="family-name"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="class"
+                  label="Lớp"
+                  name="class"
+                  onChange={(e) => setClasss(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="mssv"
+                  label="MSSV"
+                  name="mssv"
+                  onChange={(e) => setMssv(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -74,6 +110,7 @@ export default function DangKy() {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -85,12 +122,7 @@ export default function DangKy() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="Xác nhận đăng ký tài khoản"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -99,6 +131,7 @@ export default function DangKy() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              style={{backgroundColor:'black'}}
             >
               Đăng ký
             </Button>
@@ -114,3 +147,4 @@ export default function DangKy() {
       </Container>
   );
 }
+export default Register;
