@@ -8,7 +8,7 @@ const Listpost = require('./module/posts');
 app.use(express.json());
 app.use(cors());
 mongoose.connect(
-    "mongodb+srv://ThienLanh:Limbo060201!@cluster0.hthblpc.mongodb.net/Listpost?retryWrites=true&w=majority",
+    '',
     {
         useNewUrlParser: true
     }
