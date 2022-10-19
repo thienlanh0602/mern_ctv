@@ -6,7 +6,7 @@ import { deleteUsersFailed, deleteUsersSuccess, deleteUsersStart, getUsersFailed
 export const loginUser = async (user, dispatch, navigate) => {
     dispatch(loginStart());
     try {
-      const res = await axios.post("/v1/auth/login", user);
+      const res = await axios.post("./v1/auth/login", user);
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {
