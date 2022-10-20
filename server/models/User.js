@@ -2,6 +2,13 @@ const mongoose = require("mongoose");
 
 //Khung xương chứa thuộc tính của model 
 const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true, //Ép buộc nếu không nhập username thì trả về lỗi
+        minlength: 6,
+        maxlength: 20,
+        unique: true //Khi người khác tạo một username đã tồn tại thì báo lỗi       
+    },
     name: {
         type: String,
         required: true, //Ép buộc nếu không nhập name thì trả về lỗi
@@ -20,13 +27,6 @@ const userSchema = new mongoose.Schema({
         required: true, //Ép buộc nếu không nhập mssv thì trả về lỗi
         minlength: 10,
         maxlength: 10,
-        unique: true //Khi người khác tạo một username đã tồn tại thì báo lỗi       
-    },
-    username: {
-        type: String,
-        required: true, //Ép buộc nếu không nhập username thì trả về lỗi
-        minlength: 6,
-        maxlength: 20,
         unique: true //Khi người khác tạo một username đã tồn tại thì báo lỗi       
     },
     email: {
