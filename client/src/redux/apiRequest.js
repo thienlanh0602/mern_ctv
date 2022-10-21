@@ -14,7 +14,7 @@ export const loginUser = async (user, dispatch, navigate) => {
     }
  }; 
 
- export const registerUser = async (user, dispatch, navigate) => {
+export const registerUser = async (user, dispatch, navigate) => {
   dispatch(registerStart());
   try {
     const res = await axios.post("/v1/auth/register", user);

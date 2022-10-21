@@ -25,9 +25,9 @@ export default function Login() {
       e.preventDefault();
       const newUser = {
           username: username,
-          password: password,
+          password: password
       };
-      loginUser(newUser, dispatch, navigate );
+      loginUser(newUser, dispatch, navigate);
 
   }
   // const handleSubmit = (event) => {
